@@ -20,5 +20,6 @@
 install(FILES
     display_show_image.block.yml
     display_show_text.block.yml
-    DESTINATION "${GRC_BLOCKS_DIR}"
+    display_pdu2char.block.yml
+    display_utf2ascii.block.yml DESTINATION "${GRC_BLOCKS_DIR}"
 )

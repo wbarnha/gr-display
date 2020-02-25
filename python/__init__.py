@@ -45,6 +45,8 @@ if _RTLD_GLOBAL != 0:
 from .display_swig import *
 
 # import any pure python here
+from .pdu2char import pdu2char
+from .utf2ascii import utf2ascii
 #
 
 # ----------------------------------------------------------------
