@@ -36,7 +36,7 @@ class pdu2char(gr.sync_block):
 
         self.message_port_register_in(pmt.intern('in'))
 
-    def work(self, msg_pmt, output_items):
+    def work(self, input_items, output_items):
         msg = pmt.cdr(msg_pmt)
         if not pmt.is_u8vector(msg):
             print("[ERROR] Received invalid message type. Expected u8vector")
@@ -44,6 +44,5 @@ class pdu2char(gr.sync_block):
         length = len(msg) 
 
         for i in msg:
-            output_items[0] = i.decode(encoding='UTF-8') 
-
+            output_items[0][i] = i.decode(encoding='UTF-8') 
         return len(output_items[0])
