@@ -35,9 +35,5 @@ class utf2ascii(gr.sync_block):
         self.message_port_register_in(pmt.intern('in'))
 
     def work(self, input_items, output_items):
-        in0 = input_items[0]
-        out = output_items[0]
-        # <+signal processing here+>
         output_items[0][:] = input_items.decode(encoding='UTF-8')
-        out[:] = in0
         return len(output_items[0])

@@ -33,11 +33,16 @@ class pdu2char(gr.sync_block):
             in_sig=None,
             out_sig=[numpy.uint8])
 
+        self.message_port_register_in(pmt.intern('in'))
 
-    def work(self, input_items, output_items):
-        in0 = input_items[0]
-        out = output_items[0]
-        # <+signal processing here+>
-        out[:] = in0
+    def work(self, msg_pmt, output_items):
+        msg = pmt.cdr(msg_pmt)
+        if not pmt.is_u8vector(msg):
+            print("[ERROR] Received invalid message type. Expected u8vector")
+            
+        length = len(msg) 
+
+        for i in msg:
+            output_items[0] = i.decode(encoding='UTF-8') 
+
         return len(output_items[0])
-
