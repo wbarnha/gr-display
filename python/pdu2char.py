@@ -22,6 +22,7 @@
 
 import numpy
 from gnuradio import gr
+import pmt
 
 class pdu2char(gr.sync_block):
     """
