@@ -1,0 +1,17 @@
+id: display_utf2ascii
+label: utf2ascii
+category: '[display]'
+
+templates:
+  imports: import display
+  make: display.utf2ascii()
+
+outputs:
+-   domain: stream
+    dtype: byte
+
+inputs:
+-   domain: message
+    id: in
+
+file_format: 1
