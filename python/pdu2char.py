@@ -30,8 +30,8 @@ class pdu2char(gr.sync_block):
     def __init__(self):
         gr.sync_block.__init__(self,
             name="pdu2char",
-            in_sig=[<+numpy.float32+>, ],
-            out_sig=[<+numpy.float32+>, ])
+            in_sig=None,
+            out_sig=[numpy.uint8])
 
 
     def work(self, input_items, output_items):
