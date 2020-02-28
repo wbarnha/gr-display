@@ -32,21 +32,47 @@
 
 namespace gr {
   namespace display {
-
     show_text::sptr
     show_text::make(QWidget *parent)
     {
       return gnuradio::get_initial_sptr (new show_text_impl(parent));
     }
 
+	void show_text_impl::print_pdu(pmt::pmt_t pdu)
+	{
+	    pmt::pmt_t meta = pmt::car(pdu);
+	    pmt::pmt_t vector = pmt::cdr(pdu);
+	    std::cout << "* MESSAGE DEBUG PRINT PDU VERBOSE *\n";
+	    pmt::print(meta);
+	    size_t len = pmt::blob_length(vector);
+	    std::cout << "pdu_length = " << len << std::endl;
+	    std::cout << "contents = " << std::endl;
+	    size_t offset(0);
+	    const uint8_t* d = (const uint8_t*)pmt::uniform_vector_elements(vector, offset);
+	    for (size_t i = 0; i < len; i += 16) {
+		printf("%04x: ", ((unsigned int)i));
+		for (size_t j = i; j < std::min(i + 16, len); j++) {
+		    printf("%02x ", d[j]);
+            	    d_main_gui->set_text(reinterpret_cast<const char*>(d[j]),0);
+		}
+
+		std::cout << std::endl;
+	    }
+
+	    std::cout << "***********************************\n";
+	}
     /*
      * The private constructor
      */
     show_text_impl::show_text_impl(QWidget *parent)
       : gr::sync_block("show_text",
-                      gr::io_signature::make(1, 1, sizeof (char)),
+                      gr::io_signature::make(0,0,0),
                       gr::io_signature::make(0,0,0))
                       ,d_parent(parent){
+	
+    	message_port_register_in(pmt::mp("print_pdu"));
+   	set_msg_handler(pmt::mp("print_pdu"),
+        	boost::bind(&show_text_impl::print_pdu, this, _1));
         d_main_gui = NULL;
         if(qApp != NULL) {
           d_qApplication = qApp;
@@ -75,12 +101,13 @@ namespace gr {
 			  gr_vector_const_void_star &input_items,
 			  gr_vector_void_star &output_items)
     {
-        const char *in = (const char *) input_items[0];
+        //const char *in = (const char *) pmt::to_long(print_pdu);
 
         // Do <+signal processing+>
-        d_main_gui->set_text(in,noutput_items);
+        //d_main_gui->set_text(in,noutput_items);
         // Tell runtime system how many output items we produced.
-        return noutput_items;
+        //return noutput_items;
+	return 0;
     }
 
     PyObject *

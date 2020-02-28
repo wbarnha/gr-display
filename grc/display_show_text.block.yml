@@ -10,9 +10,8 @@ parameters:
     hide: part
 
 inputs:
--   domain: stream
-    label: in
-    dtype: byte
+-   domain: message
+    label: in 
 
 templates:
     imports: |-
