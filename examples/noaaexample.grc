@@ -503,28 +503,6 @@ blocks:
     coordinate: [600, 248]
     rotation: 0
     state: enabled
-- name: fcdproplus_fcdproplus_1
-  id: fcdproplus_fcdproplus
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    devicename: ''
-    freq: (sat-20)
-    if_gain: int(Ifgain)
-    lnaswitch: Lna
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    mixergainswitch: Mixergain
-    ppm: '0'
-    unit: '1000'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [0, 178]
-    rotation: 0
-    state: disabled
 - name: fir_filter_xxx_0_2
   id: fir_filter_xxx
   parameters:
@@ -757,7 +735,6 @@ connections:
 - [blocks_threshold_ff_1_0, '0', qtgui_time_sink_x_0, '1']
 - [decodeApt_0, '0', blocks_delay_0, '0']
 - [decodeApt_0, '1', fir_filter_xxx_0_2, '0']
-- [fcdproplus_fcdproplus_1, '0', blocks_multiply_xx_0, '0']
 - [fir_filter_xxx_0_2, '0', blocks_multiply_const_vxx_0, '0']
 - [fir_filter_xxx_0_2, '0', blocks_threshold_ff_0_0, '0']
 - [pad_source_0, '0', blocks_multiply_xx_0, '0']
