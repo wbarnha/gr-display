@@ -11,7 +11,7 @@ parameters:
 
 inputs:
 -   domain: message
-    label: in 
+    label: disp_pdu 
 
 templates:
     imports: |-

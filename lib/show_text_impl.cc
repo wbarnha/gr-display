@@ -38,7 +38,7 @@ namespace gr {
       return gnuradio::get_initial_sptr (new show_text_impl(parent));
     }
 
-	void show_text_impl::print_pdu(pmt::pmt_t pdu)
+	void show_text_impl::disp_pdu(pmt::pmt_t pdu)
 	{
 	    pmt::pmt_t meta = pmt::car(pdu);
 	    pmt::pmt_t vector = pmt::cdr(pdu);
@@ -70,9 +70,9 @@ namespace gr {
                       gr::io_signature::make(0,0,0))
                       ,d_parent(parent){
 	
-    	message_port_register_in(pmt::mp("print_pdu"));
-   	set_msg_handler(pmt::mp("print_pdu"),
-        	boost::bind(&show_text_impl::print_pdu, this, _1));
+    	message_port_register_in(pmt::mp("disp_pdu"));
+   	set_msg_handler(pmt::mp("disp_pdu"),
+        	boost::bind(&show_text_impl::disp_pdu, this, _1));
         d_main_gui = NULL;
         if(qApp != NULL) {
           d_qApplication = qApp;

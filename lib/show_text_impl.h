@@ -34,11 +34,13 @@ namespace gr {
       QWidget *d_parent;
       QApplication *d_qApplication;
       show_text_window *d_main_gui;
-      void print_pdu(pmt::pmt_t pdu);
+      void disp_pdu(pmt::pmt_t pdu);
+
      public:
       show_text_impl(QWidget *parent);
       ~show_text_impl(); 
       PyObject* pyqwidget();
+      //void disp_pdu(pmt::pmt_t pdu);
 
       // Where all the action really happens
       int work(int noutput_items,
