@@ -40,7 +40,6 @@ namespace gr {
       show_text_impl(QWidget *parent);
       ~show_text_impl(); 
       PyObject* pyqwidget();
-      //void disp_pdu(pmt::pmt_t pdu);
 
       // Where all the action really happens
       int work(int noutput_items,

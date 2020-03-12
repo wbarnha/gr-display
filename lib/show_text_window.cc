@@ -25,6 +25,10 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QDateTime>
+
+#include <iostream>
+#include <string>
 
 
 show_text_window::show_text_window(QWidget *parent) :
@@ -42,13 +46,23 @@ show_text_window::~show_text_window()
   delete ui;
 }
 //void show_text_window::set_text(const char *c, int count)
-void show_text_window::set_text(int c)
+void show_text_window::set_text(int c, int eol, int time)
 {
-  //if(count == 0)
-  //  return;
-  //QString s=ui->textDisplay->text()+QString::fromUtf8(c,count);
-  // Perhaps a different function from QString should be used for readability?
-  QString s=ui->textDisplay->text()+QString::number(c, 16).toUpper();
+  QString s;
+  if(time == 1)
+	  s=ui->textDisplay->text()+QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss")+QString("\n");
+  if(eol == 0)
+  {
+	  QString data = QString::number(c, 16).toUpper();
+	  if(data.length()==1)
+	  	s=ui->textDisplay->text()+QString("0%1 ").arg(data);
+	  else
+	  	s=ui->textDisplay->text()+QString("%1 ").arg(data);
+  }
+  else
+	  s=ui->textDisplay->text()+QString("\n");
+  if(time == 1)
+	  s=ui->textDisplay->text()+QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss")+QString("\n");
   ui->textDisplay->setText(s);
   update();
 }

@@ -33,8 +33,7 @@ class show_text_window : public QWidget
 public:
   explicit show_text_window(QWidget *parent = 0);
   ~show_text_window();
-  //void set_text(const char *c, int count);
-  void set_text(int c);
+  void set_text(int c, int eol, int time);
   
 private:
   Ui::show_text_window *ui;

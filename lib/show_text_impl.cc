@@ -40,6 +40,7 @@ namespace gr {
 
 	void show_text_impl::disp_pdu(pmt::pmt_t pdu)
 	{
+	    d_main_gui->set_text(0,0,1);
 	    pmt::pmt_t meta = pmt::car(pdu);
 	    pmt::pmt_t vector = pmt::cdr(pdu);
 	    std::cout << "* MESSAGE DEBUG PRINT PDU VERBOSE *\n";
@@ -53,14 +54,14 @@ namespace gr {
 		printf("%04x: ", ((unsigned int)i));
 		for (size_t j = i; j < std::min(i + 16, len); j++) {
 		    printf("%02x ", d[j]);
-            	    //d_main_gui->set_text(reinterpret_cast<const char*>(&d[j]),-1);
-		    // Should -1 be something else?
-		    d_main_gui->set_text((int)(d[j]));
+		    d_main_gui->set_text((int)(d[j]),0,0);
 		}
 
+		d_main_gui->set_text(0,1,0);
 		std::cout << std::endl;
 	    }
 	    std::cout << "***********************************\n";
+	    d_main_gui->set_text(0,1,0);
 	}
     /*
      * The private constructor
