@@ -45,9 +45,8 @@ void show_text_window::set_text(const char *c, int count)
 {
   if(count == 0)
     return;
-  //QString s=ui->textDisplay->text()+QString::fromLatin1(c,count);
-  //QString s=ui->textDisplay->text()+QString::number(c,count);
   QString s=ui->textDisplay->text()+QString::fromUtf8(c,count);
+  // Perhaps a different function from QString should be used for readability?
   ui->textDisplay->setText(s);
   update();
 }

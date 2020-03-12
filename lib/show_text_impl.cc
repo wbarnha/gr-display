@@ -54,19 +54,11 @@ namespace gr {
 		for (size_t j = i; j < std::min(i + 16, len); j++) {
 		    printf("%02x ", d[j]);
             	    d_main_gui->set_text(reinterpret_cast<const char*>(&d[j]),-1);
-            	    //d_main_gui->set_text(d[j],-1);
-            	    //d_main_gui->set_text(d[j],16);
-		    //d_main_gui->set_text(d[j],-1);
-		    //std::cout << std::hex << d << std::endl;
+		    // Should -1 be something else?
 		}
 
 		std::cout << std::endl;
 	    }
-	    //printf("%02x \n",d);
-	    //std::cout << d[1] << std::endl;
-	    //printf("%d",d);
-            //d_main_gui->set_text(reinterpret_cast<const char*>d,-1);
-            //std::cout << std::hex << d << std::endl;
 	    std::cout << "***********************************\n";
 	}
     /*
