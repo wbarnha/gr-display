@@ -53,8 +53,9 @@ namespace gr {
 		printf("%04x: ", ((unsigned int)i));
 		for (size_t j = i; j < std::min(i + 16, len); j++) {
 		    printf("%02x ", d[j]);
-            	    d_main_gui->set_text(reinterpret_cast<const char*>(&d[j]),-1);
+            	    //d_main_gui->set_text(reinterpret_cast<const char*>(&d[j]),-1);
 		    // Should -1 be something else?
+		    d_main_gui->set_text((int)(d[j]));
 		}
 
 		std::cout << std::endl;

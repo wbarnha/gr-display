@@ -41,12 +41,14 @@ show_text_window::~show_text_window()
 {
   delete ui;
 }
-void show_text_window::set_text(const char *c, int count)
+//void show_text_window::set_text(const char *c, int count)
+void show_text_window::set_text(int c)
 {
-  if(count == 0)
-    return;
-  QString s=ui->textDisplay->text()+QString::fromUtf8(c,count);
+  //if(count == 0)
+  //  return;
+  //QString s=ui->textDisplay->text()+QString::fromUtf8(c,count);
   // Perhaps a different function from QString should be used for readability?
+  QString s=ui->textDisplay->text()+QString::number(c, 16).toUpper();
   ui->textDisplay->setText(s);
   update();
 }
