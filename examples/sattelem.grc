@@ -1,0 +1,131 @@
+options:
+  parameters:
+    author: wbarnha
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: telem
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Telemetry Demo
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 12]
+    rotation: 0
+    state: enabled
+- name: blocks_wavfile_source_0
+  id: blocks_wavfile_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    file: /home/wbarnha/gr-satellites/satellite-recordings/itasat1.wav
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+    repeat: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [158, 191]
+    rotation: 0
+    state: true
+- name: low_pass_filter_0_0_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: '3000'
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    type: interp_fir_filter_fff
+    width: 1e3
+    win: firdes.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [459, 154]
+    rotation: 0
+    state: bypassed
+- name: satellites_satellite_decoder_0_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: file
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: str(sat_type)
+    norad: '100000'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [821, 180]
+    rotation: 0
+    state: true
+- name: show_text_0
+  id: show_text
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1192, 178]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_wavfile_source_0, '0', low_pass_filter_0_0_0, '0']
+- [low_pass_filter_0_0_0, '0', satellites_satellite_decoder_0_0, '0']
+- [satellites_satellite_decoder_0_0, out, show_text_0, disp_pdu]
+
+metadata:
+  file_format: 1
